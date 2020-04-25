@@ -47,7 +47,8 @@ const Nearme = [
       Axios.post('/api/product/uploadProduct' , variables)
         .then(response => {
             if(response.data.success){
-
+                alert('product successfully upload')
+                props.history.push('/')
             }else{
                 alert('failed to upload product')
             }
@@ -91,7 +92,7 @@ const Nearme = [
                 </select>
                 <br />
                 <br />
-                <Button onClick = { onSubmit} >
+                <Button onClick = { onSubmit } >
                     Submit
                 </Button>
             </Form>

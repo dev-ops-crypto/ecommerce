@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const  {Product} = require('../models/Product')
 const multer = require('multer');
 const {
     User
@@ -29,24 +30,22 @@ var upload = multer({ storage: storage }).single("file")
 //=================================
 //              product
 //=================================
- router.post("/uploadImage", auth, (req, res) => {
+router.post("/uploadProduct", auth, (req, res) => {
 
-     upload(req, res, err => {
-         if (err) {
-             return res.json({
-                 success: false,
-                 err
-             })
-         }
-         return res.json({
-             success: true,
-             image: res.req.file.path,
-             fileName: res.req.file.filename
-         })
-     })
+    //save all the data we got from the client into the DB 
+    const product = new Product(req.body)
 
- });
+    product.save((err) => {
+        if (err) return res.status(400).json({
+            success: false,
+            err
+        })
+        return res.status(200).json({
+            success: true
+        })
+    })
 
+});
 //=================================
 //             User
 //=================================
@@ -63,11 +62,6 @@ router.post("/Uploadimage", auth, (req, res) => {
     //save inside the node server
     //multer
 });
-
-
-
-
-
 
 
 
