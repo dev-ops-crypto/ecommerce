@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
-import { Typography ,Button ,Form ,message ,Input ,Icon } from 'antd';
+import { Typography ,Button ,Form ,message ,Input ,Icon, Descriptions } from 'antd';
 import FileUpload from '../../utils/FileUpload';
+import Axios from 'axios';
 const Nearme = [
     { key:1 , value: 'Patna' },
     { key:2 , value: 'Bnaras' },
@@ -10,7 +11,7 @@ const Nearme = [
     const { Title } = Typography;
     const { TextArea } = Input;
 
- const UploadProductPage = () => {
+ const UploadProductPage = (props) => {
 
     const [TitleValue, setTitleValue] = useState('')
     const [DescriptionValue, setDescriptionValue] = useState('')
@@ -32,6 +33,25 @@ const Nearme = [
      const updateImage = (newImages) => {
          setImages(newImages);
          console.log(newImages)
+     }
+     const onSubmit = (event) => {
+      event.preventDefault();
+      const variables = {
+        writer: props.user.userData._id,
+        title: TitleValue,
+        description: DescriptionValue,
+        price: PriceValue,
+        images: Images,
+        nearme: NearmeSelectValue
+      }
+      Axios.post('/api/product/uploadProduct' , variables)
+        .then(response => {
+            if(response.data.success){
+
+            }else{
+                alert('failed to upload product')
+            }
+        })
      }
     return (
         <div style = {{ maxWidth: '700px' , margin: '2rem auto'}}>
@@ -71,7 +91,7 @@ const Nearme = [
                 </select>
                 <br />
                 <br />
-                <Button onClick >
+                <Button onClick = { onSubmit} >
                     Submit
                 </Button>
             </Form>
