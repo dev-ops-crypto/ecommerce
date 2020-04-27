@@ -22,7 +22,7 @@ const productSchema = mongoose.Schema({
        type: Array,
        default: 0
    },
-   nearme: {
+   Area: {
        type: Number,
        default:1
    },

@@ -62,7 +62,23 @@ router.post("/Uploadimage", auth, (req, res) => {
     //save inside the node server
     //multer
 });
+//======================================
+//              get Product
+//======================================
+router.post("/getProducts", auth, (req, res) => {
 
+    //save all the data we got from the client into the DB 
+   Product.find()
+   .exec((err ,product) =>  {
+       if(err){
+            return res.status(400).json(
+            { success:false ,err })
+            res.status(200).json(
+            { success:true , products }
+          )
+       }else{
 
-
+       }
+   })
+});
 module.exports = router;

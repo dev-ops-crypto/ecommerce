@@ -1,3 +1,4 @@
+  
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone';
 import { Icon } from 'antd';
@@ -74,4 +75,4 @@ function FileUpload(props) {
     )
 }
 
-export default FileUpload
+export default FileUpload;
